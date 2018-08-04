@@ -73,28 +73,5 @@ app.get('/genreList', function(req,res){
 })
 
 
-//ENDPOINT DE SIGNUP
-app.post('/register', jsonParser, (req,res)=>{
-    var user = new User(req.body);
-
-    user.save((err)=>{
-        if(err) throw err;
-        res.send('Usuario Registrado');
-    })
-})
-
-//ENDPOINT DE LOGIN
-app.use('/login',jsonParser,(req,res)=>{
-    if(req.method === 'POST'){
-        const token = createToken(req.body.email, req.body.password).then((token)=>{
-            res.status(200).json({token});
-        })
-        .catch((err)=>{
-            res.status(403).json({
-                message: 'Login failed, INVALID CREDENTIALS'
-            })
-        })
-    }
-})
 
 
